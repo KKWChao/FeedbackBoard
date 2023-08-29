@@ -55,6 +55,7 @@ export default function FeedbackBoard() {
     if (feedbacks?.length > 0) {
       setFeedbacks([]);
     }
+
     setWaiting(true);
     waitingRef.current = true;
 
@@ -77,7 +78,7 @@ export default function FeedbackBoard() {
     const scrollLeft = scrollTotal - scrolled - html.clientHeight;
 
     if (scrollLeft <= 100) {
-      fetchFeedbacks(true);
+      fetchFeedbacks((append = true));
     }
   }
 
@@ -102,7 +103,7 @@ export default function FeedbackBoard() {
       )
       .then((response) => {
         /* APPENDING FEEDBACKS TO CURRENT FEEDBACKS AFTER FETCHING FOR PAGINATION */
-        if (append) {
+        if ((append = true)) {
           setFeedbacks((currentFeedback) => [
             ...currentFeedback,
             ...response.data,
@@ -114,9 +115,7 @@ export default function FeedbackBoard() {
         /* GETTING LAST ITEM FOR PAGINATION CONDITION FOR LAST ITEM */
         if (response.data?.length > 0) {
           loadedRowsRef.current += response.data.length;
-        }
-
-        if (response.data?.length === 0) {
+        } else if (response.data?.length === 0) {
           finishLoadRef.current = true;
         }
 
