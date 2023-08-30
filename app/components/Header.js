@@ -22,7 +22,7 @@ export default function Header() {
           <span> Hello, {session.user.name}</span>
           <Button
             onClick={logout}
-            className="border bg-white shadow-sm  px-2 py-0"
+            className="border bg-white shadow-sm px-2 py-0"
           >
             Logout
             <Logout />
