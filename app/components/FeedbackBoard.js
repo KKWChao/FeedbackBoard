@@ -195,7 +195,7 @@ export default function FeedbackBoard() {
   }
 
   return (
-    <main className="bg-white max-w-2xl mx-auto md:shadow-lg md:rounded-lg md:mt-4 md:mb-8 overflow-hidden">
+    <main className="bg-white md:max-w-2xl mx-auto md:shadow-lg md:rounded-lg md:mt-4 md:mb-8 overflow-hidden">
       {/* HERO */}
       <div className="bg-gradient-to-r from-cyan-400 to-blue-400 p-8">
         <h1 className="font-bold text-xl">Kelvin's Feedback</h1>

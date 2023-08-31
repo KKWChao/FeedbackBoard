@@ -16,7 +16,7 @@ export default function Header() {
     signIn("google");
   }
   return (
-    <div className="max-w-2xl mx-auto justify-between flex p-2 gap-4 items-center">
+    <div className="max-w-2xl mx-auto justify-between flex p-2 gap-4 items-center md:mt-4">
       {isLoggedIn && (
         <>
           <span> Hello, {session.user.name}</span>

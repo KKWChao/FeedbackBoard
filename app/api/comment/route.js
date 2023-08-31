@@ -10,22 +10,25 @@ export async function GET(request) {
   const url = new URL(request.url);
 
   if (url.searchParams.get("feedbackId")) {
-    const result = await Comment.find({
-      feedbackId: url.searchParams.get("feedbackId"),
-    }).populate("user");
-
-    return Response.json(
-      result
-      // /* REMOVING USER EMAILS FROM GET REQUEST (unused because needed to match user to edit comments)*/
-      // result.map((doc) => {
-      //   const { userEmail, ...commentWithoutEmail } = doc.toJSON();
-      //   const { email, ...userWithoutEmail } = commentWithoutEmail.user;
-      //   commentWithoutEmail.user = userWithoutEmail;
-      //   return commentWithoutEmail;
-      // })
-    );
+    try {
+      const result = await Comment.find({
+        feedbackId: url.searchParams.get("feedbackId"),
+      }).populate("user");
+      return new Response(JSON.stringify(result), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      });
+    } catch (error) {
+      return new Response(
+        JSON.stringify({ message: "Error fetching comments" }),
+        { status: 500, headers: { "Content-Type": "application/json" } }
+      );
+    }
   }
-  return Response.json(false);
+  return new Response(JSON.stringify(false), {
+    status: 400,
+    headers: { "Content-Type": "application/json" },
+  });
 }
 
 export async function POST(request) {
@@ -35,17 +38,29 @@ export async function POST(request) {
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    return Response.json(false);
+    return new Response(JSON.stringify({ message: "Unauthorized" }), {
+      status: 401,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
-  const commentDoc = await Comment.create({
-    text: jsonBody.text,
-    uploads: jsonBody.uploads,
-    userEmail: session.user.email,
-    feedbackId: jsonBody.feedbackId,
-  });
-
-  return Response.json(commentDoc);
+  try {
+    const commentDoc = await Comment.create({
+      text: jsonBody.text,
+      uploads: jsonBody.uploads,
+      userEmail: session.user.email,
+      feedbackId: jsonBody.feedbackId,
+    });
+    return new Response(JSON.stringify(commentDoc), {
+      status: 201,
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (error) {
+    return new Response(JSON.stringify({ message: "Error creating comment" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
 }
 
 export async function PUT(request) {
@@ -54,17 +69,36 @@ export async function PUT(request) {
 
   const session = await getServerSession(authOptions);
   if (!session) {
-    return Response.json(false);
+    return new Response(JSON.stringify({ message: "Unauthorized" }), {
+      status: 401,
+      headers: { "Content-Type": "application/json" },
+    });
   }
+
   const { id, text, uploads } = jsonBody;
 
-  const updatedCommentDoc = await Comment.findOneAndUpdate(
-    { userEmail: session.user.email, _id: id },
-    {
-      text,
-      uploads,
+  try {
+    const updatedCommentDoc = await Comment.findOneAndUpdate(
+      { userEmail: session.user.email, _id: id },
+      {
+        text,
+        uploads,
+      }
+    );
+    if (!updatedCommentDoc) {
+      return new Response(JSON.stringify({ message: "Comment not found" }), {
+        status: 404,
+        headers: { "Content-Type": "application/json" },
+      });
     }
-  );
-
-  return Response.json(updatedCommentDoc);
+    return new Response(JSON.stringify(updatedCommentDoc), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (error) {
+    return new Response(JSON.stringify({ message: "Error updating comment" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
 }
