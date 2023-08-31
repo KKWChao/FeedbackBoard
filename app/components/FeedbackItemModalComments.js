@@ -16,7 +16,7 @@ export default function FeedbackItemModalComment({ feedbackId }) {
 
   useEffect(() => {
     fetchComments();
-  });
+  }, []);
 
   /* QUERY FOR FEEDBACKS WITH CORRESPONDING ID */
   async function fetchComments() {
