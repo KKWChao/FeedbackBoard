@@ -43,7 +43,7 @@ export default function FeedbackFormModal({ setShow, onCreate }) {
 
   return (
     <Modal setShow={setShow} title={"Make a suggestion"}>
-      <form className="p-4">
+      <form className="p-4 ">
         <label className="block mt-4 mb-1 text-slate-700">Title</label>
         <input
           className="w-full border rounded-md p-2"

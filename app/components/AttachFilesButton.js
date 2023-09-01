@@ -35,12 +35,16 @@ export default function AttachFilesButton({ onNewFiles }) {
   return (
     <label
       className={
-        "py-2 px-4 text-gray-600 cursor-pointer flex gap-2 items-center"
+        "py-2 px-4 text-gray-600 dark:text-gray-200 cursor-pointer flex gap-2 items-center"
       }
     >
       {isUploading && <ClipLoader size={20} color="#cccccc" />}
       {!isUploading && <Upload className="w-4 h-4" />}
-      <span className={isUploading ? "text-gray-300" : "text-gray-600"}>
+      <span
+        className={
+          isUploading ? "text-gray-300" : "text-gray-600 dark:text-gray-200"
+        }
+      >
         {isUploading ? "Uploading..." : "Attach Files"}
       </span>
       <input

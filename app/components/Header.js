@@ -1,8 +1,10 @@
 "use client";
 import { signIn, signOut, useSession } from "next-auth/react";
+
 import Button from "./Button";
 import Logout from "./icons/Logout";
 import Login from "./icons/Login";
+import ThemeChanger from "./ThemeChanger";
 
 export default function Header() {
   const { data: session } = useSession();
@@ -20,25 +22,33 @@ export default function Header() {
       {isLoggedIn && (
         <>
           <span> Hello, {session.user.name}</span>
-          <Button
-            onClick={logout}
-            className="border bg-white shadow-sm px-2 py-0"
-          >
-            Logout
-            <Logout />
-          </Button>
+
+          <div className="flex items-center gap-2">
+            <ThemeChanger />
+            <Button
+              onClick={logout}
+              className="border dark:border-none bg-white dark:bg-slate-700 dark:text-white shadow-sm px-2 py-0"
+            >
+              Logout
+              <Logout />
+            </Button>
+          </div>
         </>
       )}
+
       {!isLoggedIn && (
         <>
-          <span>Not Logged In</span>
-          <Button
-            onClick={login}
-            className="border bg-white shadow-sm px-2 py-0"
-          >
-            Login
-            <Login />
-          </Button>
+          <span className="">Not Logged In</span>
+          <div className="flex items-center gap-2">
+            <ThemeChanger />
+            <Button
+              onClick={login}
+              className="border dark:border-none bg-white dark:bg-slate-700 dark:text-white shadow-sm px-2 py-0"
+            >
+              Login
+              <Login />
+            </Button>
+          </div>
         </>
       )}
     </div>

@@ -195,16 +195,16 @@ export default function FeedbackBoard() {
   }
 
   return (
-    <main className="bg-white md:max-w-2xl mx-auto md:shadow-lg md:rounded-lg md:mt-4 md:mb-8 overflow-hidden">
+    <main className="md:max-w-2xl mx-auto md:shadow-lg md:rounded-lg md:mt-4 md:mb-8 overflow-hidden">
       {/* HERO */}
-      <div className="bg-gradient-to-r from-cyan-400 to-blue-400 p-8">
+      <div className="bg-gradient-to-r from-cyan-400 to-blue-400 dark:bg-gradient-to-l p-8">
         <h1 className="font-bold text-xl">Kelvin's Feedback</h1>
         <p className="text-opacity-90 text-slate-700">
           Help me decide what should I build or how can I improve?
         </p>
       </div>
       {/* OPTIONS BAR */}
-      <div className="bg-gray-100 md:px-8 px-4 py-4 flex border-b items-center justify-around">
+      <div className="bg-gray-100 dark:bg-gray-600 md:px-8 px-4 py-4 flex border-b dark:border-black items-center justify-around">
         <div className="md:grow flex items-center gap-4 mr-2">
           {/* FILTER OPTIONS */}
           <select
@@ -223,7 +223,7 @@ export default function FeedbackBoard() {
 
           {/* SEARCH OPTION */}
           <div className="relative">
-            <Search className="w-6 h-6 text-gray-500 absolute top-2 left-2 pointer-events-none" />
+            <Search className="w-6 h-6 text-gray-400 absolute top-2 left-2 pointer-events-none" />
             <input
               className=" bg-transparent p-2 pl-9 rounded-md text-gray-400 w-full "
               type="text"
@@ -236,7 +236,7 @@ export default function FeedbackBoard() {
 
         {/* SUGGESTION BUTTON */}
         <div>
-          <Button primary={"true"} onClick={openFeedbackModal} className="">
+          <Button primary={"true"} onClick={openFeedbackModal}>
             Make a Suggestion
           </Button>
         </div>

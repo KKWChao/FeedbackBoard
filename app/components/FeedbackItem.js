@@ -64,7 +64,7 @@ export default function FeedbackItem({
       {/* LEFT TITLE AND DESCRIPTION*/}
       <div className="flex-grow">
         <h2 className="font-bold">{title}</h2>
-        <p className="text-gray-600 text-sm">
+        <p className="text-gray-600 dark:text-gray-200 text-sm">
           {shortDescription}
           {shortDescription.length < description.length ? " . . ." : ""}
         </p>

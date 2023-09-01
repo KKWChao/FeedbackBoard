@@ -101,10 +101,12 @@ export default function FeedbackItemModalComment({ feedbackId }) {
                   )}
                   {/* STANDARD MODE */}
                   {!editingCheck && (
-                    <p className="text-gray-600">{comment?.text}</p>
+                    <p className="text-gray-600 dark:text-gray-200">
+                      {comment?.text}
+                    </p>
                   )}
 
-                  <div className="text-gray-400 mt-2 text-sm">
+                  <div className="text-gray-400 mt-2 text-sm dark:text-gray-300">
                     {comment.user.name} &nbsp; &middot; &nbsp;
                     <TimeAgo datetime={comment.createdAt} locale="en_US" />
                     {/* CHECKING MATCHING USER COMMENT TO EDIT */}

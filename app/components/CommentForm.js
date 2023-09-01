@@ -58,7 +58,9 @@ export default function CoommentForm({ feedbackId, onPost }) {
       />
       {uploads.length > 0 && (
         <div className="">
-          <div className="text-sm text-gray-600 mb-2 mt-4">Files:</div>
+          <div className="text-sm text-gray-600 mb-2 mt-4 dark:text-gray-200">
+            Files:
+          </div>
           <div className="flex gap-3">
             {uploads.map((link) => (
               <div>

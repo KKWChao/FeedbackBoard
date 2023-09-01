@@ -112,7 +112,7 @@ export default function FeedbackItemModal({
         {/* NON EDIT MODE */}
         {!isEditing && (
           <p
-            className="text-gray-600"
+            className="text-gray-600 dark:text-gray-200"
             dangerouslySetInnerHTML={{
               __html: description.replace(/\n/gi, "<br />"),
             }}
@@ -122,7 +122,9 @@ export default function FeedbackItemModal({
         {/* SHOWING UPLOADS */}
         {uploads?.length > 0 && (
           <div className="mt-4">
-            <span className="text-sm text-gray-600">Attachments:</span>
+            <span className="text-sm text-gray-600 dark:text-gray-200">
+              Attachments:
+            </span>
             <div className="flex gap-2 mt-2">
               {(isEditing ? editUploads : uploads).map((link) => (
                 <Attachment
